@@ -159,3 +159,16 @@ def find_lines(image):
         return 1, None, None
     
     return 0, image, boxes
+
+def crop_boxes(image, boxes):
+    ret = []
+    boxes = reversed(boxes)
+    for box in boxes:
+        left = int(box[0][0] - (box[1][0]//2))
+        right = int(box[0][0] + (box[1][0]//2))
+        top = int(box[0][1] + (box[1][1]//2))
+        bottom = int(box[0][1] - (box[1][1]//2))
+        time = image[top:bottom, left:right]
+        ret.append(time)
+        
+    return ret
